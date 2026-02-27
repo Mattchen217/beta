@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HetaiAI Beta</title>
+  <link rel="stylesheet" href="/assets/app.css?v=3" />
+</head>
+<body>
+  <div id="app" style="padding:18px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto;">
+    Loading HetaiAI UI…
+  </div>
+
+  <!-- 出错时把错误显示出来，避免“白屏无提示” -->
+  <pre id="err" style="
+    display:none;
+    white-space:pre-wrap;
+    padding:12px;
+    margin:12px;
+    border:1px solid #f99;
+    background:#fff0f0;
+    border-radius:12px;
+    font-size:12px;"></pre>
+
+  <script>
+    window.addEventListener("error", (e) => {
+      const el = document.getElementById("err");
+      el.style.display = "block";
+      el.textContent = "[JS Error]\n" + (e?.error?.stack || e.message || e);
+    });
+    window.addEventListener("unhandledrejection", (e) => {
+      const el = document.getElementById("err");
+      el.style.display = "block";
+      el.textContent = "[Promise Rejection]\n" + (e?.reason?.stack || e.reason || e);
+    });
+  </script>
+
+  <!-- 采用 ES Modules：拆文件，便于分模块开发 -->
+  <script type="module" src="/assets/main.js?v=3"></script>
+</body>
+</html>
